@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import db from '../firebase/firebaseConfig';
 import { collection, onSnapshot } from 'firebase/firestore';
 
-const ListaDeConfirmados = () => {
+const ListaDeNoConfirmados = () => {
     const [invitados, cambiarInvitados] = useState([]);
     const { getCollapseProps, getToggleProps, isExpanded } = useCollapse()
     
@@ -32,11 +32,11 @@ const ListaDeConfirmados = () => {
         invitados.length > 0 &&
         <div>
             <Boton {...getToggleProps()}>
-                {isExpanded ? 'Ocultar Lista "Confirmados"' : 'Mostrar Lista de "Confirmados"'}
+                {isExpanded ? 'Ocultar Lista "No Confirmados"' : 'Mostrar Lista de "No Confirmados"'}
             </Boton>
             <section {...getCollapseProps()}>
                 <ContenedorConfirmados>
-                    <Lista>Lista de Invitados Confirmados</Lista>
+                    <Lista>Lista de Invitados "No Confirmados"</Lista>
 
                     <Tabla>
                         <tbody>
@@ -45,10 +45,10 @@ const ListaDeConfirmados = () => {
                                 <RowTitle>Nombre</RowTitle>
                                 <RowTitle>Apellido</RowTitle>
                             </tr>
-                            
+
                             {// eslint-disable-next-line array-callback-return
                             invitados.map((invitado, index) => {
-                                if (invitado.confirmStatus === 'Confirmado') {
+                                if (invitado.confirmStatus === 'No Confirmado') {
                                     return (
                                         <tr key={invitado.id}>
                                             <TablaData>{index}</TablaData>
@@ -123,7 +123,7 @@ const Lista = styled.h2`
     color: #000;
     font-size: 2.5em;
     text-shadow: 3px 3px 4px white;
-    margin: 0.5em 0.2em;
+    margin: 0.5em 0;
     text-align: center;
 
     @media (max-width: 600px) {
@@ -142,8 +142,8 @@ const ContenedorConfirmados = styled.div`
 
     @media (max-width: 600px) {
         font-size: 17px;
-        width: 95%;
+        width: 90%;
 	}
 `;
 
-export default ListaDeConfirmados;
+export default ListaDeNoConfirmados;
